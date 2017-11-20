@@ -1,0 +1,67 @@
+body{
+	background-color: #FFDAB9;
+	}
+
+	button.startSpin{
+  background: #3498db;
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  -webkit-border-radius: 10;
+  -moz-border-radius: 10;
+  border-radius: 10px;
+  font-family: Arial;
+  color: #ebebeb;
+  font-size: 25px;
+  padding: 5px 10px 5px 10px;
+  border: solid #3189bf 2px;
+  text-decoration: none;
+    margin-left: 205px;
+}
+button.startSpin {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
+ul {
+  list-style-type: none;
+}
+ul li {
+  display: inline ;
+   
+}
+ul.uncommon {
+    margin-left: 50px;
+}
+ul.rare {
+  margin-left: 100px;
+}
+ul.legendary {
+    margin-left: 150px;
+}
+img {
+    border-radius: 10px/20px;
+}
+img.common {
+    border:4px solid #B0C3D9;
+}
+img.uncommon{
+    border:4px solid #5E98D9;
+}
+img.rare {
+    border:4px solid #8847FF;
+}
+img.legendary {
+    border:4px solid #E4AE33;
+}
+p{
+    color: #000;
+  font-family: Arvo;
+  font-weight: bold;
+}
