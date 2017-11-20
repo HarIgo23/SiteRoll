@@ -8,7 +8,6 @@ function random(){
     var max=100;
     var numRand=min-0.5 +Math.random()*(max-min+1);
     numRand=Math.round(numRand);
-    console.log(numRand);
     if(numRand>=1&&numRand<=12)
         return 1;
     else if(numRand<=24)
