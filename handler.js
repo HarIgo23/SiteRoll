@@ -1,6 +1,6 @@
-function startSpin(){
+document.getElementById('startSpin').onclick = function(){
     var number=random();
-    out(number);
+    out(number); 
 }
 
 function random(){
@@ -29,6 +29,7 @@ function random(){
     else if(numRand<=100)
         return 10;
 }
+
 function out(num){
     var out='';
     out+='<img src="Image/';
