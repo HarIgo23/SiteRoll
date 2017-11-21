@@ -2,7 +2,7 @@ body{
 	background-color: #FFDAB9;
 	}
 
-.startSpin{
+#startSpin{
     background: #3498db;
     background-image: linear-gradient(to bottom, #3498db, #2980b9);
     border-radius: 10px;
@@ -12,9 +12,11 @@ body{
     padding: 5px 10px 5px 10px;
     border: solid #3189bf 2px;
     text-decoration: none;
+    position: absolute;
+    left: 40%;
 }
 
-.startSpin {
+#startSpin {
     background: #3cb0fd;
     background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
     text-decoration: none;
@@ -61,6 +63,45 @@ img {
 }
 
 p {
+    margin-top: 50px;
     color: #000;
     font: 100%/1.6 palatino, georgia ;
+}
+
+h1 {
+    color: #000;
+    font:georgia ;
+}
+
+#placeSpin {
+    position: relative;
+    border: 1px solid #CCC;
+    border-radius: 15px;
+    background: #eee;
+    display: inline-block;
+    width: 390px;
+    background:#FFDAB9; 
+}
+#placeSpin img {
+    width: 100px;
+    height: 100px;  
+    display: block;
+  }
+  
+#placeSpin ul {
+    height: 108px;
+    width: 9999px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    transition: 250ms;
+    font-size: 0;
+  }
+
+#placeSpin li {
+    display: inline-block;
+}
+
+#placeImage {
+    overflow: hidden;
 }
