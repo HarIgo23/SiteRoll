@@ -1,30 +1,31 @@
 document.getElementById('startSpin').onclick = function(){
-    var number=random();
+    var number=randomItem();
     out(number); 
 }
 
-function random(){
+function randomItem(){
+    //веса у common-14%,uncommon-9%,rare-7%,legendary-3%
     var min=1;
     var max=100;
     var numRand=min-0.5 +Math.random()*(max-min+1);
     numRand=Math.round(numRand);
-    if(numRand>=1&&numRand<=12)
+    if(numRand>=1&&numRand<=14)
         return 1;
-    else if(numRand<=24)
+    else if(numRand<=28)
         return 2;
-    else if(numRand<=36)
+    else if(numRand<=42)
         return 3;
-    else if(numRand<=48)
+    else if(numRand<=56)
         return 4;
-    else if(numRand<=58)
+    else if(numRand<=65)
         return 5;
-    else if(numRand<=68)
+    else if(numRand<=74)
         return 6;
-    else if(numRand<=78)
+    else if(numRand<=83)
         return 7;
-    else if(numRand<=86)
+    else if(numRand<=90)
         return 8;
-    else if(numRand<=94)
+    else if(numRand<=97)
         return 9;
     else if(numRand<=100)
         return 10;
