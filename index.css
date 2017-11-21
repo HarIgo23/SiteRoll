@@ -2,7 +2,7 @@ body{
 	background-color: #FFDAB9;
 	}
 
-button.startSpin{
+.startSpin{
     background: #3498db;
     background-image: linear-gradient(to bottom, #3498db, #2980b9);
     border-radius: 10px;
@@ -14,7 +14,7 @@ button.startSpin{
     text-decoration: none;
 }
 
-button.startSpin {
+.startSpin {
     background: #3cb0fd;
     background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
     text-decoration: none;
@@ -28,15 +28,15 @@ ul li {
     display: inline ;   
 }
 
-ul.uncommon {
+.uncommonList {
     margin-left: 50px;
 }
 
-ul.rare {
+.rareList {
     margin-left: 100px;
 }
 
-ul.legendary {
+.legendaryList {
     margin-left: 150px;
 }
 
@@ -44,24 +44,23 @@ img {
     border-radius: 10px/20px;
 }
 
-img.common {
-    border:4px solid #B0C3D9;
+.common {
+    border: 4px solid #B0C3D9;
 }
 
-img.uncommon{
-    border:4px solid #5E98D9;
+.uncommon{
+    border: 4px solid #5E98D9;
 }
 
-img.rare {
-    border:4px solid #8847FF;
+.rare {
+    border: 4px solid #8847FF;
 }
 
-img.legendary {
-    border:4px solid #E4AE33;
+.legendary {
+    border: 4px solid #E4AE33;
 }
 
 p {
     color: #000;
-    font-family: Arvo;
-    font-weight: bold;
+    font: 100%/1.6 palatino, georgia ;
 }
