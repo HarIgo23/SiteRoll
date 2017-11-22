@@ -1,12 +1,13 @@
 var imageFirstElement=listImage.firstElementChild;
 imageFirstElement.style.marginLeft="-100px";
 var moveSlider;
+var firstSpin=false;
 for(var i = 0; i < imageFirstElement.children.length; i++){
     imageFirstElement.children[i].setAttribute("numberPosition",i+1);
 }
 console.log(listAwards.children[3].children[0]);
 document.getElementById('startSpin').onclick = function(){
-    if(moveSlider!==true)
+    if(!moveSlider)
         {
             var number=randomItem();
             document.getElementById('out').innerHTML=out(number);
@@ -78,14 +79,21 @@ function speedSpin(start, end,number) {
     var begin = new Date();
     var timer = setInterval(function() {
         var timePassed = Date.now() - begin;    
-        
+        if(timePassed >= (duration*5)-50)
+        {
+            imageFirstElement.replaceChild(takeElem(number),imageFirstElement.children[7]);
+        }
             if (timePassed >= duration*5) {
                 clearInterval(timer); 
                 return;
               }
             //imageFirstElement.insertBefore(takeElem(), imageFirstElement [9]);
-            for(var i=5;i<=10;i++)
-                imageFirstElement.appendChild(takeElem(i));
+            if(!firstSpin)
+                {
+                    for(var i=5;i<=10;i++)
+                        imageFirstElement.appendChild(takeElem(i));
+                    firstSpin=true;
+                }
             imageFirstElement.appendChild(imageFirstElement.firstElementChild);
             
     }, 50);
