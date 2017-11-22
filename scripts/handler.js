@@ -1,25 +1,25 @@
 var imageFirstElement=listImage.firstElementChild;
 imageFirstElement.style.marginLeft="-100px";
 var moveSlider;
-console.log(imageFirstElement.children[5]);
 for(var i = 0; i < imageFirstElement.children.length; i++){
     imageFirstElement.children[i].setAttribute("numberPosition",i+1);
 }
-
+console.log(listAwards.children[3].children[0]);
 document.getElementById('startSpin').onclick = function(){
     if(moveSlider!==true)
         {
             var number=randomItem();
-            out(number);
+            document.getElementById('out').innerHTML=out(number);
             moveSlider=true;
             startTime = new Date(0);
             var time=Number(2-0.5 +Math.random()*3).toPrecision(3);//диапазон от 1.5 до 4.5 
-            endTime = new Date(time*100);//150ms до 450 ms
-            //endTime=200;
+            //endTime = new Date(time*100);//150ms до 450 ms
+            endTime=200;
             //console.log(time);
-            speedSpin(startTime, endTime);
-            setTimeout(function(){moveSlider=false},time*500);
-            //setTimeout(function(){moveSlider=false},1000);   
+            speedSpin(startTime, endTime,number);
+            //setTimeout(function(){moveSlider=false},time*500);
+            setTimeout(function(){moveSlider=false},1000);
+            console.log(imageFirstElement.children[6]);
         }
     
 }
@@ -51,14 +51,13 @@ function randomItem(){
     else if(numRand<=100)
         return 10;
 }
-
 function out(num){
     var out='';
     out+='<img src="Image/';
     out+=num;
     out+='.jpg" alt="" ';
     switch(true){
-        case num >=1 && num<=4:
+        case num>=1 && num<=4:
             out+='class="common"';
             break;
         case num<=7:
@@ -70,11 +69,11 @@ function out(num){
         default:
             out+='class="legendary"';
     }
-    out+='>'
-    document.getElementById('out').innerHTML=out;
+    out+='>';
+    return out;
 }
 
-function speedSpin(start, end) {
+function speedSpin(start, end,number) {
     var duration = end - start;
     var begin = new Date();
     var timer = setInterval(function() {
@@ -85,15 +84,16 @@ function speedSpin(start, end) {
                 return;
               }
             //imageFirstElement.insertBefore(takeElem(), imageFirstElement [9]);
+            for(var i=5;i<=10;i++)
+                imageFirstElement.appendChild(takeElem(i));
             imageFirstElement.appendChild(imageFirstElement.firstElementChild);
             
     }, 50);
 }
-function takeElem() {
-    var numberPosition=randomItem();
-    for(var i = 0; i < imageFirstElement.children.length; i++) {
-        if (numberPosition == parseInt(imageFirstElement.children[i].getAttribute("numberPosition")))
-            return imageFirstElement.children[i];
-    }
+function takeElem(randomNumber) {
+    //var randomNumber=randomItem();
+    var temp=document.createElement('li');
+    temp.innerHTML=out(randomNumber);
+    return temp;
 }
     
