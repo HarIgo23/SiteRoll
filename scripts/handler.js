@@ -1,6 +1,27 @@
+var imageFirstElement=listImage.firstElementChild;
+imageFirstElement.style.marginLeft="-100px";
+var moveSlider;
+console.log(imageFirstElement.children[5]);
+for(var i = 0; i < imageFirstElement.children.length; i++){
+    imageFirstElement.children[i].setAttribute("numberPosition",i+1);
+}
+
 document.getElementById('startSpin').onclick = function(){
-    var number=randomItem();
-    out(number); 
+    if(moveSlider!==true)
+        {
+            var number=randomItem();
+            out(number);
+            moveSlider=true;
+            startTime = new Date(0);
+            var time=Number(2-0.5 +Math.random()*3).toPrecision(3);//диапазон от 1.5 до 4.5 
+            endTime = new Date(time*100);//150ms до 450 ms
+            //endTime=200;
+            //console.log(time);
+            speedSpin(startTime, endTime);
+            setTimeout(function(){moveSlider=false},time*500);
+            //setTimeout(function(){moveSlider=false},1000);   
+        }
+    
 }
 
 function randomItem(){
@@ -52,3 +73,27 @@ function out(num){
     out+='>'
     document.getElementById('out').innerHTML=out;
 }
+
+function speedSpin(start, end) {
+    var duration = end - start;
+    var begin = new Date();
+    var timer = setInterval(function() {
+        var timePassed = Date.now() - begin;    
+        
+            if (timePassed >= duration*5) {
+                clearInterval(timer); 
+                return;
+              }
+            //imageFirstElement.insertBefore(takeElem(), imageFirstElement [9]);
+            imageFirstElement.appendChild(imageFirstElement.firstElementChild);
+            
+    }, 50);
+}
+function takeElem() {
+    var numberPosition=randomItem();
+    for(var i = 0; i < imageFirstElement.children.length; i++) {
+        if (numberPosition == parseInt(imageFirstElement.children[i].getAttribute("numberPosition")))
+            return imageFirstElement.children[i];
+    }
+}
+    
