@@ -1,27 +1,24 @@
 var imageFirstElement=listImage.firstElementChild;
 imageFirstElement.style.marginLeft="-100px";
+
 var moveSlider;
-var firstSpin=false;
-//var inCheck=false;
+var firstSpin=true;
+var inCheck=true;
 var resultSpin;
-var count =8;//при первом кручении всегда на девятый элемент падает
-for(var i = 0; i < imageFirstElement.children.length; i++){
-    imageFirstElement.children[i].setAttribute("numberPosition",i+1);
-}
+var count =1;//при первом кручении всегда на девятый элемент падает
+
 document.getElementById('startSpin').onclick = function(){
     if(!moveSlider)
         {   
             moveSlider=true;
             startTime = new Date(0);
-            var time=Number(2-0.5 +Math.random()*3).toPrecision(3);//диапазон от 1.5 до 4.5 
-            //endTime = new Date(time*100);//150ms до 450 ms
             endTime=200;
-            //console.log(time);
             speedSpin(startTime, endTime);
-            //setTimeout(function(){moveSlider=false},time*500);
             setTimeout(function(){
                 moveSlider=false;
-                document.getElementById('out').innerHTML=out(resultSpin+1);
+                document.getElementById('out').innerHTML=out(resultSpin);
+                if(inCheck)
+                    inCheck=false;
             },1000);
         }
     
@@ -88,24 +85,22 @@ function speedSpin(start, end) {
             clearInterval(timer); 
             return;
         };
-        if(!firstSpin)
+        if(firstSpin===true)
         {
             for(var i=5;i<=10;i++)
                 imageFirstElement.appendChild(takeElem(i));
-            firstSpin=true;
-            resultSpin=8;
-            count-=3;
+            firstSpin=false;
+            resultSpin=2;
+            count-=1;
         }
-        //задаёт рандомные айтемы в яейках(не предсказуемо)
-        /*if ((inCheck) && countRepeat<10)
+        //задаёт рандомные айтемы в ячейках(не предсказуемо)
+        /*if (inCheck===false && countRepeat<10)
         {
-            console.log(inCheck);
-            randomValue =randomItem();
-            if(count==countRepeat)
+            if(count===countRepeat)
             {
                 resultSpin=randomValue;
                 if(count==0)
-                    count=9;
+                    count=10;
                 count--;
             }
             imageFirstElement.replaceChild(takeElem(randomValue),imageFirstElement.children[countRepeat]);
@@ -113,8 +108,16 @@ function speedSpin(start, end) {
         }*/
         imageFirstElement.appendChild(imageFirstElement.firstElementChild);
             
-    }, 60);//при 60 падает на 8 элемент (9) и на минус 4 элемента следующее кручение ,
+    }, 50);//при 60 падает на 8 элемент (9) и на минус 4 элемента следующее кручение ,
     //при 50 падает на 1 элемент(2) и на минус 1 элемент следующее кручение
+    if(firstSpin===false)
+     {
+         resultSpin=count+1;
+         if(count<=0)
+             count=10;
+         count--;
+     } 
+      
 }
 function takeElem(randomNumber) {
     var temp=document.createElement('li');
