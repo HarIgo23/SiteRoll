@@ -17,7 +17,7 @@ document.getElementById('startSpin').onclick = function(){
             setTimeout(function(){
                 moveSlider=false;
                 document.getElementById('out').innerHTML=out(resultSpin);
-            },1100);
+            },1000);
         }
     
 }
@@ -57,18 +57,14 @@ function out(num){
     switch(true){
         case num>=1 && num<=4:
             out+='class="common"';
-			console.log('here1 - '+num);
             break;
         case num<=7:
             out+='class="uncommon"';
-			console.log('here2 - '+num);
             break;
         case num<=9:
             out+='class="rare"';
-			console.log('here3 - '+num);
             break;
         default:
-		    console.log('here4 - '+num);
             out+='class="legendary"';
     }
     out+='>';
@@ -78,40 +74,35 @@ function out(num){
 function speedSpin(start, end) {
     var duration = end - start;
     var begin = new Date();
-    console.log("Fir: "+countResult);
     checkCount(countResult);
-    console.log("Sec: "+countResult);
     var countRepeat=0;
     var randomValue;
     var timer = setInterval(function() {
         var timePassed = Date.now() - begin;
-        //console.log(timePassed);
 		var durationSpin=duration*5-70;
 	if (timePassed >= durationSpin) {
-        imageFirstElement.replaceChild(takeElem(resultSpin),imageFirstElement.children[2]);
+        //вместо третьего подставляет загаданный ранее и выходит из setInterval
+        imageFirstElement.replaceChild(getElement(resultSpin),imageFirstElement.children[2]);
         clearInterval(timer);
         return;
     }
-        //задаёт рандомные айтемы в ячейках(не предсказуемо)
         if (countRepeat<10)
         {
 			randomValue=randomItem();
-            imageFirstElement.replaceChild(takeElem(randomValue),imageFirstElement.children[countRepeat]);
+            imageFirstElement.replaceChild(getElement(randomValue),imageFirstElement.children[countRepeat]);
             countRepeat++;
         }
         imageFirstElement.appendChild(imageFirstElement.firstElementChild);
             
-    }, 60);//при 60 падает на 8 элемент (9) и на минус 4 элемента следующее кручение ,
-    //при 50 падает на 1 элемент(2) и на минус 1 элемент следующее кручение
+    }, 60);
 }
-function takeElem(randomNumber) {
+function getElement(randomNumber) {
     var temp=document.createElement('li');
     temp.innerHTML=out(randomNumber);
     return temp;
 }
 //в случае если count < 3 ,только для 60ms нужна 
 function checkCount(count){
-    console.log(count);
     switch(count){
 		case 4:
             countResult=9;
