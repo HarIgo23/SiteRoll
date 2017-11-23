@@ -1,5 +1,5 @@
 var imageFirstElement=listImage.firstElementChild;
-imageFirstElement.style.marginLeft="-100px";
+imageFirstElement.style.marginLeft="-110px";
 
 var moveSlider;
 var firstSpin=true;
