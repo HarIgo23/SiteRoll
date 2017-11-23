@@ -3,38 +3,56 @@
     <head>
        <meta charset="UTF-8">
        <title>Главная</title>
-       <link rel="stylesheet" href="index.css">
-       <script src="handler.js" defer></script>
+       <link rel="stylesheet" href="styles/index.css">
+       <script src="scripts/handler.js" defer></script>
     </head>
     <body>
-      
-      <button class="startSpin" id="startSpin">Start</button>
-      
+
+      <div id="slider">
+          <div id="listImage">
+               <ul>
+                   <li><img src="Image/1.jpg" class="common"></li>
+                   <li><img src="Image/2.jpg" class="common"></li>
+                   <li><img src="Image/3.jpg" class="common" ></li>
+                   <li><img src="Image/4.jpg" class="common"></li>
+				   <li><img src="Image/5.jpg" class="uncommon"></li>
+				   <li><img src="Image/6.jpg" class="uncommon"></li>
+				   <li><img src="Image/7.jpg" class="uncommon"></li>
+				   <li><img src="Image/8.jpg" class="rare"></li>
+				   <li><img src="Image/9.jpg" class="rare"></li>
+				   <li><img src="Image/10.jpg" class="legendary"></li>
+				   
+               </ul>
+          </div>
+          <button id="startSpin">Start</button>  
+      </div>
+      <div id="frame"></div>
       <p>Ваш выигрыш:</p>
-       <div id="out" class="out"></div> 
-       <hr>
-       <p>Возможные награды :</p>
-       <ul id="commonList">
-            <li ><img src="Image/1.jpg" alt="" class="common" id="img1"></li>
-	        <li ><img src="Image/2.jpg" alt="" class="common" id="img2"></li>
-	        <li ><img src="Image/3.jpg" alt="" class="common" id="img3"></li>
-	        <li ><img src="Image/4.jpg" alt="" class="common" id="img4"></li>
-	   </ul>
-	   
-	   <ul class="uncommonList">
-            <li  ><img src="Image/5.jpg" alt="" class="uncommon" id="img5"></li>
-	        <li ><img src="Image/6.jpg" alt="" class="uncommon" id="img6"></li>
-	        <li ><img src="Image/7.jpg" alt="" class="uncommon" id="img7"></li>   
-	   </ul>
+      <div id="out" ></div>
+      <hr>
+      
+        <h1>Возможные награды :</h1>
        
-        <ul class="rareList">
-            <li ><img src="Image/8.jpg" alt="" class="rare" id="img8"></li>
-	        <li ><img src="Image/9.jpg" alt="" class="rare" id="img9"></li>   
-        </ul>
-        
-        <ul class="legendaryList">
-            <li ><img src="Image/10.jpg" alt="" class="legendary" id="img10"></li>
-        </ul>
+       <div id="listAwards">
+           <ul id="commonList">
+               <li ><img src="Image/1.jpg" alt="" class="common"></li>
+               <li ><img src="Image/2.jpg" alt="" class="common"></li>
+               <li ><img src="Image/3.jpg" alt="" class="common"></li>
+               <li ><img src="Image/4.jpg" alt="" class="common"></li>
+           </ul>
+           <ul class="uncommonList">
+               <li  ><img src="Image/5.jpg" alt="" class="uncommon"></li>
+	           <li ><img src="Image/6.jpg" alt="" class="uncommon"></li>
+	           <li ><img src="Image/7.jpg" alt="" class="uncommon"></li>
+	       </ul>
+           <ul class="rareList">
+               <li ><img src="Image/8.jpg" alt="" class="rare"></li>
+               <li ><img src="Image/9.jpg" alt="" class="rare"></li>
+           </ul>
+           <ul class="legendaryList">
+               <li ><img src="Image/10.jpg" alt="" class="legendary"></li>
+           </ul>
+       </div>
         
     </body>
 </html>
