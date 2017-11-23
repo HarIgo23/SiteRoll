@@ -9,6 +9,7 @@ var countResult=7;//при первом кручении всегда на де�
 document.getElementById('startSpin').onclick = function(){
     if(!moveSlider)
         {   
+            resultSpin=randomItem();
             moveSlider=true;
             startTime = new Date(0);
             endTime=200;
@@ -77,6 +78,8 @@ function out(num){
 function speedSpin(start, end) {
     var duration = end - start;
     var begin = new Date();
+    checkCount(countResult);
+    
     var countRepeat=0;
     var randomValue;
     var timer = setInterval(function() {
@@ -84,26 +87,15 @@ function speedSpin(start, end) {
         console.log(timePassed);
 		var durationSpin=duration*5-70;
 	if (timePassed >= durationSpin) {
-            clearInterval(timer); 
-            return;
-        }
+        imageFirstElement.replaceChild(takeElem(resultSpin),imageFirstElement.children[countResult]);
+        clearInterval(timer);
+        return;
+    }
         //задаёт рандомные айтемы в ячейках(не предсказуемо)
         if (countRepeat<10)
         {
 			//randomValue=randomItem();
 			randomValue=countRepeat;
-            if(countResult===countRepeat)
-            {
-                resultSpin=randomValue;
-                if(countResult>5)
-                    countResult-=6;
-				else if(countResult>5)
-				{
-					countResult=checkCount(countResult);
-					console.log(countResult);
-				}					
-                
-            }
             //imageFirstElement.replaceChild(takeElem(countRepeat+1),imageFirstElement.children[countRepeat]);
             countRepeat++;
         }
@@ -120,17 +112,23 @@ function takeElem(randomNumber) {
 //в случае если count < 3 ,только для 60ms нужна 
 function checkCount(count){
     switch(count){
-		case 5:
-		    return 9;
 		case 4:
+            countResult=9;
+		    return;
+		case 3:
+            countResult=8;
 		    return 8;
-        case 3:
-            return 7;
         case 2:
-            return 6;
+            countResult=7;
+            return 7;
         case 1:
+            countResult=6;
+            return 6;
+        case 0:
+            countResult=5;
             return 5;
         default:
-            return 4;
+            countResult-=5;
+            return;
     }
 }
