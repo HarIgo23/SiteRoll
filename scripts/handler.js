@@ -1,10 +1,8 @@
 var imageFirstElement=listImage.firstElementChild;
 imageFirstElement.style.marginLeft="-110px";
 
-var moveSlider;
-var firstSpin=true;
-var resultSpin;
-var countResult=2;//при первом кручении всегда на девятый элемент падает
+var moveSlider;//запущена ли анимация (true or false)
+var resultSpin;//рандомная переменная которая будет выведена
 
 document.getElementById('startSpin').onclick = function(){
     if(!moveSlider)
@@ -13,7 +11,7 @@ document.getElementById('startSpin').onclick = function(){
             moveSlider=true;
             startTime = new Date(0);
             endTime=200;
-            speedSpin(startTime, endTime);
+            motionSlider();
             setTimeout(function(){
                 moveSlider=false;
                 document.getElementById('out').innerHTML=out(resultSpin);
@@ -24,6 +22,7 @@ document.getElementById('startSpin').onclick = function(){
 
 function randomItem(){
     //веса у common-14%,uncommon-10%,rare-6%,legendary-2%
+    //согласно весам возвращает цифру от 1-10
     var min=1;
     var max=100;
     var numRand=min-0.5 +Math.random()*(max-min+1);
@@ -50,6 +49,7 @@ function randomItem(){
         return 10;
 }
 function out(num){
+    //собирает элемент image в зависимости от полученного номера
     var out='';
     out+='<img src="Image/';
     out+=num;
@@ -71,15 +71,13 @@ function out(num){
     return out;
 }
 
-function speedSpin(start, end) {
-    var duration = end - start;
+function motionSlider() {
+    //анимация слайдера и замена элементов слайдера 
     var begin = new Date();
-    checkCount(countResult);
     var countRepeat=0;
-    var randomValue;
     var timer = setInterval(function() {
         var timePassed = Date.now() - begin;
-		var durationSpin=duration*5-70;
+		var durationSpin=930;
 	if (timePassed >= durationSpin) {
         //вместо третьего подставляет загаданный ранее и выходит из setInterval
         imageFirstElement.replaceChild(getElement(resultSpin),imageFirstElement.children[2]);
@@ -88,8 +86,7 @@ function speedSpin(start, end) {
     }
         if (countRepeat<10)
         {
-			randomValue=randomItem();
-            imageFirstElement.replaceChild(getElement(randomValue),imageFirstElement.children[countRepeat]);
+            imageFirstElement.replaceChild(getElement(randomItem()),imageFirstElement.children[countRepeat]);
             countRepeat++;
         }
         imageFirstElement.appendChild(imageFirstElement.firstElementChild);
@@ -97,30 +94,8 @@ function speedSpin(start, end) {
     }, 60);
 }
 function getElement(randomNumber) {
+    //возвращает готовый к вставке на страницу элемент списка
     var temp=document.createElement('li');
     temp.innerHTML=out(randomNumber);
     return temp;
-}
-//в случае если count < 3 ,только для 60ms нужна 
-function checkCount(count){
-    switch(count){
-		case 4:
-            countResult=9;
-		    return;
-		case 3:
-            countResult=8;
-		    return 8;
-        case 2:
-            countResult=7;
-            return 7;
-        case 1:
-            countResult=6;
-            return 6;
-        case 0:
-            countResult=5;
-            return 5;
-        default:
-            countResult-=5;
-            return;
-    }
 }
