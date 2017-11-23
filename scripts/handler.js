@@ -4,7 +4,7 @@ imageFirstElement.style.marginLeft="-100px";
 var moveSlider;
 var firstSpin=true;
 var resultSpin;
-var countResult=7;//при первом кручении всегда на девятый элемент падает
+var countResult=2;//при первом кручении всегда на девятый элемент падает
 
 document.getElementById('startSpin').onclick = function(){
     if(!moveSlider)
@@ -78,25 +78,25 @@ function out(num){
 function speedSpin(start, end) {
     var duration = end - start;
     var begin = new Date();
+    console.log("Fir: "+countResult);
     checkCount(countResult);
-    
+    console.log("Sec: "+countResult);
     var countRepeat=0;
     var randomValue;
     var timer = setInterval(function() {
         var timePassed = Date.now() - begin;
-        console.log(timePassed);
+        //console.log(timePassed);
 		var durationSpin=duration*5-70;
 	if (timePassed >= durationSpin) {
-        imageFirstElement.replaceChild(takeElem(resultSpin),imageFirstElement.children[countResult]);
+        imageFirstElement.replaceChild(takeElem(resultSpin),imageFirstElement.children[2]);
         clearInterval(timer);
         return;
     }
         //задаёт рандомные айтемы в ячейках(не предсказуемо)
         if (countRepeat<10)
         {
-			//randomValue=randomItem();
-			randomValue=countRepeat;
-            //imageFirstElement.replaceChild(takeElem(countRepeat+1),imageFirstElement.children[countRepeat]);
+			randomValue=randomItem();
+            imageFirstElement.replaceChild(takeElem(randomValue),imageFirstElement.children[countRepeat]);
             countRepeat++;
         }
         imageFirstElement.appendChild(imageFirstElement.firstElementChild);
@@ -111,6 +111,7 @@ function takeElem(randomNumber) {
 }
 //в случае если count < 3 ,только для 60ms нужна 
 function checkCount(count){
+    console.log(count);
     switch(count){
 		case 4:
             countResult=9;
