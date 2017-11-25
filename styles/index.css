@@ -2,6 +2,7 @@ body{
 	background-color: #FFDAB9;
 	}
 
+#clearHistory,
 #startSpin{
     background: #3498db;
     background-image: linear-gradient(to bottom, #3498db, #2980b9);
@@ -13,14 +14,18 @@ body{
     border: solid #3189bf 2px;
     text-decoration: none;
     position: absolute;
-    left: 40%;
     margin-top:10px;
 }
 
+#clearHistory,
 #startSpin {
     background: #3cb0fd;
     background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
     text-decoration: none;
+}
+
+#starSpin{
+    left: 40%;
 }
 
 ul {
@@ -121,6 +126,8 @@ h1 {
     width: 600px;
 }
 
+
 #history{
-    width: 700px;
+    height: 300px;
+    width: 600px;
 }

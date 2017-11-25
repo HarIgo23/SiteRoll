@@ -4,8 +4,6 @@ imageFirstElement.style.marginLeft="-110px";
 var moveSlider;//запущена ли анимация (true or false)
 var resultSpin;//рандомная переменная которая будет выведена
 var listHistory=[];//масиив в котором хранятся элементы истории
-var inOut=document.getElementById('out').innerHTML;
-var inHist=document.getElementById('history').innerHTML;
 
 document.getElementById('startSpin').onclick = function(){
     if(!moveSlider)
@@ -22,6 +20,11 @@ document.getElementById('startSpin').onclick = function(){
             },duration+100);
         }
     
+}
+
+document.getElementById('clearHistory').onclick=function clearHistory(){
+    listHistory=[];
+    document.getElementById('listHistory').innerHTML="";
 }
 
 function randomItem(){
@@ -113,7 +116,7 @@ function generateDuration(){
 }
 
 function addHistory(){
-    listHistory.unshift(getImage(resultSpin)+"<br/>");
+    listHistory.unshift(getImage(resultSpin));
     if(listHistory.length>10)
         listHistory.pop();
 }
@@ -122,5 +125,5 @@ function outHistory(){
     out='';
     for(var key in listHistory)
         out+=listHistory[key];
-    document.getElementById('history').innerHTML=out;
+    document.getElementById('listHistory').innerHTML=out;
 }
