@@ -7,14 +7,15 @@ var resultSpin;//рандомная переменная которая буде
 document.getElementById('startSpin').onclick = function(){
     if(!moveSlider)
         {   
+            //запускает анимацию и рандомно генерирует длительность
             moveSlider=true;
-            startTime = new Date(0);
-            endTime=200;
-            motionSlider();
+            var time=Number(7-0.5 +Math.random()*(6)).toPrecision(3);//диапазон от 6.5 до 12.5
+            duration=time*100;//650ms до 1250 ms
+            motionSlider(duration);
             setTimeout(function(){
                 moveSlider=false;
                 document.getElementById('out').innerHTML=out(resultSpin);
-            },1000);
+            },duration+100);
         }
     
 }
@@ -70,13 +71,12 @@ function out(number){
     return out;
 }
 
-function motionSlider() {
+function motionSlider(durationSpin) {
     //анимация слайдера и замена элементов слайдера 
     var begin = new Date();
     var countRepeat=0;
     var timer = setInterval(function() {
         var timePassed = Date.now() - begin;
-		var durationSpin=930;
 	if (timePassed >= durationSpin) {
         //записывает id элемента на котором остановился Slider как конечный результат рандома
         //И выходит из setInterval
