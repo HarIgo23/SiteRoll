@@ -3,6 +3,9 @@ imageFirstElement.style.marginLeft="-110px";
 
 var moveSlider;//запущена ли анимация (true or false)
 var resultSpin;//рандомная переменная которая будет выведена
+var listHistory=[];//масиив в котором хранятся элементы истории
+var inOut=document.getElementById('out').innerHTML;
+var inHist=document.getElementById('history').innerHTML;
 
 document.getElementById('startSpin').onclick = function(){
     if(!moveSlider)
@@ -13,7 +16,9 @@ document.getElementById('startSpin').onclick = function(){
             motionSlider(duration);
             setTimeout(function(){
                 moveSlider=false;
-                document.getElementById('out').innerHTML=out(resultSpin);
+                addHistory();
+                outHistory();
+                document.getElementById('out').innerHTML=getImage(resultSpin);
             },duration+100);
         }
     
@@ -48,7 +53,7 @@ function randomItem(){
         return 10;
 }
 
-function out(number){
+function getImage(number){
     //собирает элемент image в зависимости от полученного номера
     var out='';
     out+='<img src="Image/';
@@ -98,11 +103,24 @@ function motionSlider(durationSpin) {
 function getElement(randomNumber) {
     //возвращает готовый к вставке на страницу элемент списка
     var temp=document.createElement('li');
-    temp.innerHTML=out(randomNumber);
+    temp.innerHTML=getImage(randomNumber);
     return temp;
 }
 
 function generateDuration(){
     var time=Number(7-0.5 +Math.random()*(6)).toPrecision(3);//диапазон от 6.5 до 12.5
     return time*100;//650ms до 1250 ms
+}
+
+function addHistory(){
+    listHistory.unshift(getImage(resultSpin)+"<br/>");
+    if(listHistory.length>10)
+        listHistory.pop();
+}
+
+function outHistory(){
+    out='';
+    for(var key in listHistory)
+        out+=listHistory[key];
+    document.getElementById('history').innerHTML=out;
 }

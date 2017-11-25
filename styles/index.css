@@ -116,8 +116,11 @@ h1 {
     margin-left: -0.53px;
 }
 
-#listAwards,
-#history{
+#listAwards{
     margin-left: -3%;
+    width: 600px;
+}
+
+#history{
     width: 700px;
 }
