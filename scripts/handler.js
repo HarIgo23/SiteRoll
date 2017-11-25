@@ -7,15 +7,15 @@ var resultSpin;//рандомная переменная которая буде
 document.getElementById('startSpin').onclick = function(){
     if(!moveSlider)
         {   
-            resultSpin=randomItem();
+            //запускает анимацию и рандомно генерирует длительность
             moveSlider=true;
-            startTime = new Date(0);
-            endTime=200;
-            motionSlider();
+            var time=Number(7-0.5 +Math.random()*(6)).toPrecision(3);//диапазон от 6.5 до 12.5
+            duration=time*100;//650ms до 1250 ms
+            motionSlider(duration);
             setTimeout(function(){
                 moveSlider=false;
                 document.getElementById('out').innerHTML=out(resultSpin);
-            },1000);
+            },duration+100);
         }
     
 }
@@ -48,44 +48,45 @@ function randomItem(){
     else if(numRand<=100)
         return 10;
 }
-function out(num){
+function out(number){
     //собирает элемент image в зависимости от полученного номера
     var out='';
     out+='<img src="Image/';
-    out+=num;
+    out+=number;
     out+='.jpg" alt="" ';
     switch(true){
-        case num>=1 && num<=4:
+        case number>=1 && number<=4:
             out+='class="common"';
             break;
-        case num<=7:
+        case number<=7:
             out+='class="uncommon"';
             break;
-        case num<=9:
+        case number<=9:
             out+='class="rare"';
             break;
         default:
             out+='class="legendary"';
     }
-    out+='>';
+    out+='id="'+number+'">';
     return out;
 }
 
-function motionSlider() {
+function motionSlider(durationSpin) {
     //анимация слайдера и замена элементов слайдера 
     var begin = new Date();
     var countRepeat=0;
     var timer = setInterval(function() {
         var timePassed = Date.now() - begin;
-		var durationSpin=930;
 	if (timePassed >= durationSpin) {
-        //вместо третьего подставляет загаданный ранее и выходит из setInterval
-        imageFirstElement.replaceChild(getElement(resultSpin),imageFirstElement.children[2]);
+        //записывает id элемента на котором остановился Slider как конечный результат рандома
+        //И выходит из setInterval
+        resultSpin=imageFirstElement.children[2].children[0].getAttribute('id');
         clearInterval(timer);
         return;
     }
         if (countRepeat<10)
         {
+            //заменяет все элементы на новые
             imageFirstElement.replaceChild(getElement(randomItem()),imageFirstElement.children[countRepeat]);
             countRepeat++;
         }
