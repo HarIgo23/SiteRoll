@@ -7,7 +7,6 @@ var resultSpin;//рандомная переменная которая буде
 document.getElementById('startSpin').onclick = function(){
     if(!moveSlider)
         {   
-            resultSpin=randomItem();
             moveSlider=true;
             startTime = new Date(0);
             endTime=200;
@@ -48,26 +47,26 @@ function randomItem(){
     else if(numRand<=100)
         return 10;
 }
-function out(num){
+function out(number){
     //собирает элемент image в зависимости от полученного номера
     var out='';
     out+='<img src="Image/';
-    out+=num;
+    out+=number;
     out+='.jpg" alt="" ';
     switch(true){
-        case num>=1 && num<=4:
+        case number>=1 && number<=4:
             out+='class="common"';
             break;
-        case num<=7:
+        case number<=7:
             out+='class="uncommon"';
             break;
-        case num<=9:
+        case number<=9:
             out+='class="rare"';
             break;
         default:
             out+='class="legendary"';
     }
-    out+='>';
+    out+='id="'+number+'">';
     return out;
 }
 
@@ -79,13 +78,15 @@ function motionSlider() {
         var timePassed = Date.now() - begin;
 		var durationSpin=930;
 	if (timePassed >= durationSpin) {
-        //вместо третьего подставляет загаданный ранее и выходит из setInterval
-        imageFirstElement.replaceChild(getElement(resultSpin),imageFirstElement.children[2]);
+        //записывает id элемента на котором остановился Slider как конечный результат рандома
+        //И выходит из setInterval
+        resultSpin=imageFirstElement.children[2].children[0].getAttribute('id');
         clearInterval(timer);
         return;
     }
         if (countRepeat<10)
         {
+            //заменяет все элементы на новые
             imageFirstElement.replaceChild(getElement(randomItem()),imageFirstElement.children[countRepeat]);
             countRepeat++;
         }
