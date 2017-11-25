@@ -1,23 +1,41 @@
 var imageFirstElement=listImage.firstElementChild;
 imageFirstElement.style.marginLeft="-110px";
 
+
 var moveSlider;//запущена ли анимация (true or false)
 var resultSpin;//рандомная переменная которая будет выведена
+var listHistory=[];//масиив в котором хранятся элементы истории
+
+if(localStorage.getItem('history')!=undefined)
+{
+    //проверка на наличие истории в localStorage
+    listHistory=JSON.parse(localStorage.getItem('history'))
+    outHistory();
+}
 
 document.getElementById('startSpin').onclick = function(){
     if(!moveSlider)
         {   
             //запускает анимацию и рандомно генерирует длительность
             moveSlider=true;
-            var time=Number(7-0.5 +Math.random()*(6)).toPrecision(3);//диапазон от 6.5 до 12.5
-            duration=time*100;//650ms до 1250 ms
+            duration=generateDuration();
             motionSlider(duration);
             setTimeout(function(){
                 moveSlider=false;
-                document.getElementById('out').innerHTML=out(resultSpin);
+                addHistory();
+                outHistory();
+                document.getElementById('out').innerHTML=getImage(resultSpin);
+                localStorage.setItem('history',JSON.stringify(listHistory));
             },duration+100);
+            
         }
     
+}
+
+document.getElementById('clearHistory').onclick=function clearHistory(){
+    listHistory=[];
+    localStorage.removeItem('history');
+    document.getElementById('listHistory').innerHTML="";
 }
 
 function randomItem(){
@@ -48,7 +66,8 @@ function randomItem(){
     else if(numRand<=100)
         return 10;
 }
-function out(number){
+
+function getImage(number){
     //собирает элемент image в зависимости от полученного номера
     var out='';
     out+='<img src="Image/';
@@ -94,9 +113,28 @@ function motionSlider(durationSpin) {
             
     }, 60);
 }
+
 function getElement(randomNumber) {
     //возвращает готовый к вставке на страницу элемент списка
     var temp=document.createElement('li');
-    temp.innerHTML=out(randomNumber);
+    temp.innerHTML=getImage(randomNumber);
     return temp;
+}
+
+function generateDuration(){
+    var time=Number(7-0.5 +Math.random()*(6)).toPrecision(3);//диапазон от 6.5 до 12.5
+    return time*100;//650ms до 1250 ms
+}
+
+function addHistory(){
+    listHistory.unshift(getImage(resultSpin));
+    if(listHistory.length>10)
+        listHistory.pop();
+}
+
+function outHistory(){
+    out='';
+    for(var key in listHistory)
+        out+=listHistory[key];
+    document.getElementById('listHistory').innerHTML=out;
 }
