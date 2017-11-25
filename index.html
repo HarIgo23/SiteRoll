@@ -10,7 +10,7 @@
 
       <div id="slider">
           <div id="listImage">
-               <ul>
+               <ul sliderUl>
                    <li><img src="Image/1.jpg" class="common" id='1'></li>
                    <li><img src="Image/2.jpg" class="common" id='2'></li>
                    <li><img src="Image/3.jpg" class="common" id='3'></li>
@@ -20,8 +20,7 @@
                    <li><img src="Image/7.jpg" class="uncommon" id='7'></li>
                    <li><img src="Image/8.jpg" class="rare" id='8'></li>
                    <li><img src="Image/9.jpg" class="rare" id='9'></li>
-                   <li><img src="Image/10.jpg" class="legendary" id='10'></li>
-				   
+                   <li><img src="Image/10.jpg" class="legendary" id='10'></li>   
                </ul>
           </div>
           <button id="startSpin">Start</button>  
@@ -31,8 +30,14 @@
       <div id="out" ></div>
       <hr>
       
-        <h1>Возможные награды :</h1>
-       
+      <h1>Последние 10 выигрышей:</h1>
+      <div id=history>
+                <ul id="historyUl">
+                </ul>
+      </div>
+      <hr>
+      
+     <h1>Возможные награды :</h1> 
        <div id="listAwards">
            <ul id="commonList">
                <li ><img src="Image/1.jpg" alt="" class="common"></li>
