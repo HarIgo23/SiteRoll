@@ -1,9 +1,17 @@
 var imageFirstElement=listImage.firstElementChild;
 imageFirstElement.style.marginLeft="-110px";
 
+
 var moveSlider;//запущена ли анимация (true or false)
 var resultSpin;//рандомная переменная которая будет выведена
 var listHistory=[];//масиив в котором хранятся элементы истории
+
+if(localStorage.getItem('history')!=undefined)
+{
+    //проверка на наличие истории в localStorage
+    listHistory=JSON.parse(localStorage.getItem('history'))
+    outHistory();
+}
 
 document.getElementById('startSpin').onclick = function(){
     if(!moveSlider)
@@ -17,13 +25,16 @@ document.getElementById('startSpin').onclick = function(){
                 addHistory();
                 outHistory();
                 document.getElementById('out').innerHTML=getImage(resultSpin);
+                localStorage.setItem('history',JSON.stringify(listHistory));
             },duration+100);
+            
         }
     
 }
 
 document.getElementById('clearHistory').onclick=function clearHistory(){
     listHistory=[];
+    localStorage.removeItem('history');
     document.getElementById('listHistory').innerHTML="";
 }
 
