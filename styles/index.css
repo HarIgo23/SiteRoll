@@ -28,6 +28,10 @@ body{
     left: 38%;
 }
 
+#clearHistory{
+    
+}
+
 ul {
     list-style-type: none;
 }
@@ -37,15 +41,15 @@ ul li {
 }
 
 .uncommonList {
-    margin-left: 50px;
+    margin-left:10%;
 }
 
 .rareList {
-    margin-left: 100px;
+   margin-left:20%;
 }
 
 .legendaryList {
-    margin-left: 150px;
+    margin-left:30%;
 }
 
 img {
@@ -68,10 +72,11 @@ img {
     border: 5px solid #FF8C00;
 }
 
-p {
+#yourAwards {
     margin-top: 50px;
     color: #000;
-    font: 100%/1.6 palatino, georgia ;
+    font-weight: bold;
+    font-family: serif ,georgia;
 }
 
 h1 {
@@ -130,4 +135,29 @@ h1 {
 #history{
     height: 300px;
     width: 600px;
+}
+
+h2{
+    font-weight: bold;
+    font-family: serif ,georgia;
+}
+
+#commonText{
+    margin-left:37%;
+    color:#4169E1;
+}
+
+#uncommonText{
+    margin-left:34%;
+    color:#9932CC;
+}
+
+#rareText{
+    margin-left:41.5%;
+    color:#4B0082;
+}
+
+#legendaryText{
+    margin-left:38%;
+    color:#FF8C00;
 }
