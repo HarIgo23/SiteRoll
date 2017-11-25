@@ -9,8 +9,7 @@ document.getElementById('startSpin').onclick = function(){
         {   
             //запускает анимацию и рандомно генерирует длительность
             moveSlider=true;
-            var time=Number(7-0.5 +Math.random()*(6)).toPrecision(3);//диапазон от 6.5 до 12.5
-            duration=time*100;//650ms до 1250 ms
+            duration=generateDuration();
             motionSlider(duration);
             setTimeout(function(){
                 moveSlider=false;
@@ -48,6 +47,7 @@ function randomItem(){
     else if(numRand<=100)
         return 10;
 }
+
 function out(number){
     //собирает элемент image в зависимости от полученного номера
     var out='';
@@ -94,9 +94,15 @@ function motionSlider(durationSpin) {
             
     }, 60);
 }
+
 function getElement(randomNumber) {
     //возвращает готовый к вставке на страницу элемент списка
     var temp=document.createElement('li');
     temp.innerHTML=out(randomNumber);
     return temp;
+}
+
+function generateDuration(){
+    var time=Number(7-0.5 +Math.random()*(6)).toPrecision(3);//диапазон от 6.5 до 12.5
+    return time*100;//650ms до 1250 ms
 }
