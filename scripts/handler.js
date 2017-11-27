@@ -4,7 +4,7 @@ imageFirstElement.style.marginLeft = "-110px";
 
 var moveSlider;//запущена ли анимация (true or false)
 var resultSpin;//рандомная переменная которая будет выведена
-var listHistory = [];//масиив в котором хранятся элементы истории
+var listHistory = [];//масcив в котором хранятся элементы истории
 
 if (localStorage.getItem('history') != undefined) {
     listHistory = JSON.parse(localStorage.getItem('history'));
