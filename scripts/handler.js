@@ -140,9 +140,12 @@ function addHistory() {
 }
 
 function outHistory() {
+    //вставляет на страницу собранный из массива
+    //список изображений
     var out = '';
     
     for (var key in listHistory)
         out += listHistory[key];
+    
     document.getElementById('listHistory').innerHTML = out;
 }
