@@ -33,7 +33,7 @@ document.getElementById('clearHistory').onclick = function clearHistory() {
 function randomItem() {
     //веса у common-14%,uncommon-10%,rare-6%,legendary-2%
     //согласно весам возвращает цифру от 1-10
-    //соmmon 4 шт,uncommon-3 шт,rare-2 шт,legendary-1 шт
+    //соmmon-4 шт,uncommon-3 шт,rare-2 шт,legendary-1 шт
     //Важно! Сумма весов должна равняться 100 
     var min = 1;
     var max = 100;
@@ -70,9 +70,8 @@ function randomItem() {
 function getImage(number) {
     //собирает элемент image в зависимости от полученного номера
     var out = '';
-    out += '<img src="Image/';
-    out += number;
-    out += '.jpg" alt="" ';
+    out += '<img src="Image/' + number + '.jpg" alt="" ';
+    
     switch (true) {
         case number >= 1 && number <= 4:
             out += 'class="common"';
@@ -86,7 +85,9 @@ function getImage(number) {
         default:
             out += 'class="legendary"';
     }
+    
     out += 'id="' + number + '">';
+    
     return out;
 }
 
@@ -100,7 +101,7 @@ function motionSlider(durationSpin) {
 	if (timePassed >= durationSpin) {
         //записывает id элемента на котором остановился Slider как конечный результат рандома
         //И выходит из setInterval
-        resultSpin = imageFirstElement.children[1].children[0].getAttribute('id');
+        resultSpin = imageFirstElement.children[1].getAttribute('id');
         clearInterval(timer);
         
         return;
@@ -108,7 +109,7 @@ function motionSlider(durationSpin) {
         
         if (countRepeat < 10) {
             //заменяет все элементы на новые
-            imageFirstElement.replaceChild(getElement(randomItem()), imageFirstElement.children[countRepeat]);
+            imageFirstElement.replaceChild(getElement(), imageFirstElement.children[countRepeat]);
             countRepeat++;
         }
         
@@ -116,9 +117,11 @@ function motionSlider(durationSpin) {
     }, 60);
 }
 
-function getElement(randomNumber) {
+function getElement() {
     //возвращает готовый к вставке на страницу элемент списка
+    var randomNumber=randomItem();
     var temp = document.createElement('li');
+    temp.setAttribute("id", randomNumber);
     temp.innerHTML = getImage(randomNumber);
     
     return temp;
