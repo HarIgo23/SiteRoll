@@ -1,5 +1,3 @@
-var imageFirstElement = listImage.firstElementChild;
-
 var moveSlider;//запущена ли анимация (true or false)
 var resultSpin;//рандомная переменная которая будет выведена
 var listHistory = [];//масcив в котором хранятся элементы истории
@@ -101,7 +99,7 @@ function motionSlider(durationSpin) {
 	if (timePassed >= durationSpin) {
         //записывает id элемента на котором остановился Slider как конечный результат рандома
         //И выходит из setInterval
-        resultSpin = imageFirstElement.children[1].getAttribute('id');
+        resultSpin = listImage.firstElementChild.children[1].getAttribute('id');
         clearInterval(timer);
         
         return;
@@ -109,11 +107,11 @@ function motionSlider(durationSpin) {
         
         if (countRepeat < 10) {
             //заменяет все элементы на новые
-            imageFirstElement.replaceChild(getElement(), imageFirstElement.children[countRepeat]);
+            listImage.firstElementChild.replaceChild(getElement(), listImage.firstElementChild.children[countRepeat]);
             countRepeat++;
         }
         
-        imageFirstElement.appendChild(imageFirstElement.firstElementChild);
+        listImage.firstElementChild.appendChild(listImage.firstElementChild.firstElementChild);
     }, 60);
 }
 
