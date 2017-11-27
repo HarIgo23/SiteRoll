@@ -7,7 +7,10 @@ var weightCommon = 14;
 var weightUncommon = 10;
 var weightRare = 6;
 var weightLegendary = 2;
-var countC
+var countCommon = 4;
+var countUncommon = 3;
+var countRare = 2;
+var countLegendary=1;
 
 if (localStorage.getItem('history') != undefined) {
     listHistory = JSON.parse(localStorage.getItem('history'));
@@ -48,23 +51,23 @@ function randomItem() {
     var numRand = min - 0.5 + Math.random() * (max - min + 1);
     numRand = Math.round(numRand);
     switch(true) {
-        case numRand >= 1 && numRand <= commonWeight :
+        case numRand >= 1 && numRand <= weightCommon :
             return 1;
-        case numRand <= 2 * commonWeight:
+        case numRand <= 2 * weightCommon:
             return 2;
-        case numRand <= 3 * commonWeight:
+        case numRand <= 3 * weightCommon:
             return 3;
-        case numRand <= 4 * commonWeight:
+        case numRand <= 4 * weightCommon:
             return 4;
-        case numRand <= (4 * commonWeight + uncommonWeight):
+        case numRand <= (4 * weightCommon + weightUncommon):
             return 5;
-        case numRand <= (4 * commonWeight + 2 * uncommonWeight):
+        case numRand <= (4 * weightCommon + 2 * weightUncommon):
             return 6;
-        case numRand <= (4 * commonWeight + 3 * uncommonWeight):
+        case numRand <= (4 * weightCommon + 3 * weightUncommon):
             return 7;
-        case numRand <= (100 - legendaryWeight - rareWeight):
+        case numRand <= (100 - weightLegendary - weightRare):
             return 8;
-        case numRand <= (100 - legendaryWeight):
+        case numRand <= (100 - weightLegendary):
             return 9;
         default:
             return 10;
