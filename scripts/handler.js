@@ -1,12 +1,22 @@
+var countCase = 10;
 var moveSlider;//запущена ли анимация (true or false)
 var resultSpin;//рандомная переменная которая будет выведена
 var listHistory = [];//масcив в котором хранятся элементы истории
+var arrayCase = [];
+var weightCommon = 14;
+var weightUncommon = 10;
+var weightRare = 6;
+var weightLegendary = 2;
+var countC
 
 if (localStorage.getItem('history') != undefined) {
     listHistory = JSON.parse(localStorage.getItem('history'));
     outHistory();
 }
 
+for (var i=1;i<=countCase;i++) {
+        sliderUl.appendChild(getElement(i));
+    }
 document.getElementById('startSpin').onclick = function () {
     if (!moveSlider) {
             moveSlider = true;
@@ -35,10 +45,6 @@ function randomItem() {
     //Важно! Сумма весов должна равняться 100 
     var min = 1;
     var max = 100;
-    var commonWeight = 14;
-    var uncommonWeight = 10;
-    var rareWeight = 6;
-    var legendaryWeight = 2;
     var numRand = min - 0.5 + Math.random() * (max - min + 1);
     numRand = Math.round(numRand);
     switch(true) {
@@ -105,9 +111,9 @@ function motionSlider(durationSpin) {
         return;
     }
         
-        if (countRepeat < 10) {
+        if (countRepeat < countCase) {
             //заменяет все элементы на новые
-            listImage.firstElementChild.replaceChild(getElement(), listImage.firstElementChild.children[countRepeat]);
+            listImage.firstElementChild.replaceChild(getElement(randomItem()), listImage.firstElementChild.children[countRepeat]);
             countRepeat++;
         }
         
@@ -115,9 +121,8 @@ function motionSlider(durationSpin) {
     }, 60);
 }
 
-function getElement() {
+function getElement(randomNumber) {
     //возвращает готовый к вставке на страницу элемент списка
-    var randomNumber=randomItem();
     var temp = document.createElement('li');
     temp.setAttribute("id", randomNumber);
     temp.innerHTML = getImage(randomNumber);
