@@ -1,17 +1,3 @@
-var countCase = 10;
-var moveSlider;//запущена ли анимация (true or false)
-var resultSpin;//рандомная переменная которая будет выведена
-var listHistory = [];//масcив в котором хранятся элементы истории
-var arrayCase = [];
-var weightCommon = 14;
-var weightUncommon = 10;
-var weightRare = 6;
-var weightLegendary = 2;
-var countCommon = 4;
-var countUncommon = 3;
-var countRare = 2;
-var countLegendary=1;
-
 if (localStorage.getItem('history') != undefined) {
     listHistory = JSON.parse(localStorage.getItem('history'));
     outHistory();
@@ -61,7 +47,6 @@ function randomItem() {
         summaryWeight += parseInt(arrayCase[i-1].getAttribute("weight"),10);
         console.log(summaryWeight);
         if (numRand <= summaryWeight) {
-            //parseInt(arrayCase[i-1].getAttribute("id"),10)
             return i;
         }
     }
