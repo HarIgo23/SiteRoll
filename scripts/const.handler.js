@@ -3,14 +3,14 @@ var resultSpin;//рандомная переменная которая буде
 var listHistory = [];//масcив в котором хранятся элементы истории
 var arrayCase = [];//массив для хранения списка элементов
 
-//количество countCase равна сумме всех кейсов
+//Важно! Количество countCase равна сумме всех кейсов
 var countCase = 10;
 var countCommon = 4;
 var countUncommon = 3;
 var countRare = 2;
 var countLegendary=1;
 
-//веса всех кейсов*количество в сумме должны давать 100
+//Важно! Веса всех кейсов*количество в сумме должны давать 100
 var weightCommon = 14;
 var weightUncommon = 10;
 var weightRare = 6;

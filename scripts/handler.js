@@ -3,28 +3,37 @@ if (localStorage.getItem('history') != undefined) {
     outHistory();
 }
 
-for (var i=1; i<=countCase; i++) {
-    let element=getElement(i);
-    element.setAttribute('weight',checkWeight(i));
-    element.setAttribute( 'id',i);
-    arrayCase.push(element);
-    sliderUl.appendChild(element);
-}
-
-document.getElementById('startSpin').onclick = function () {
-    if (!moveSlider) {
-            moveSlider = true;
-            var duration = generateDuration();
-            motionSlider(duration);
-            setTimeout(function () {
-                moveSlider = false;
-                addHistory();
-                outHistory();
-                document.getElementById('out').innerHTML = getImage(resultSpin);
-                localStorage.setItem('history', JSON.stringify(listHistory));
-            }, duration + 100);
+if (countCase === (countCommon + countUncommon + countRare + countLegendary)){
+    if((countCommon * weightCommon + countUncommon *weightUncommon 
+        + countRare * weightRare + countLegendary * weightLegendary)===100) {
+        
+        for(var i=1; i<=countCase; i++) {
+            let element=getElement(i);
+            element.setAttribute('weight',checkWeight(i));
+            element.setAttribute( 'id',i);
+            arrayCase.push(element);
+            sliderUl.appendChild(element);
+        }
+        
+        document.getElementById('startSpin').onclick = function () {
+            if(!moveSlider) {
+                 moveSlider = true;
+                var duration = generateDuration();
+                motionSlider(duration);
+                setTimeout(function () {
+                    moveSlider = false;
+                    addHistory();
+                    outHistory();
+                    document.getElementById('out').innerHTML = getImage(resultSpin);
+                    localStorage.setItem('history', JSON.stringify(listHistory));
+                }, duration + 100);
+            }
+        }
     }
-};
+}
+else{
+    consol.log("Допущена ошибка в значении весов или количества кейсов")
+}
 
 document.getElementById('clearHistory').onclick = function clearHistory() {
     listHistory = [];
@@ -33,10 +42,6 @@ document.getElementById('clearHistory').onclick = function clearHistory() {
 };
 
 function randomItem() {
-    //веса у common-14%,uncommon-10%,rare-6%,legendary-2%
-    //согласно весам возвращает цифру от 1-10
-    //соmmon-4 шт,uncommon-3 шт,rare-2 шт,legendary-1 шт
-    //Важно! Сумма весов должна равняться 100 
     var min = 1;
     var max = 100;
     var summaryWeight = 0;
