@@ -17,9 +17,14 @@ if (localStorage.getItem('history') != undefined) {
     outHistory();
 }
 
-for (var i=1;i<=countCase;i++) {
-        sliderUl.appendChild(getElement(i));
-    }
+for (var i=1; i<=countCase; i++) {
+    let element=getElement(i);
+    element.setAttribute('weight',checkWeight(i));
+    element.setAttribute( 'id',i);
+    arrayCase.push(element);
+    sliderUl.appendChild(element);
+}
+
 document.getElementById('startSpin').onclick = function () {
     if (!moveSlider) {
             moveSlider = true;
@@ -48,29 +53,17 @@ function randomItem() {
     //Важно! Сумма весов должна равняться 100 
     var min = 1;
     var max = 100;
+    var summaryWeight = 0;
     var numRand = min - 0.5 + Math.random() * (max - min + 1);
     numRand = Math.round(numRand);
-    switch(true) {
-        case numRand >= 1 && numRand <= weightCommon :
-            return 1;
-        case numRand <= 2 * weightCommon:
-            return 2;
-        case numRand <= 3 * weightCommon:
-            return 3;
-        case numRand <= 4 * weightCommon:
-            return 4;
-        case numRand <= (4 * weightCommon + weightUncommon):
-            return 5;
-        case numRand <= (4 * weightCommon + 2 * weightUncommon):
-            return 6;
-        case numRand <= (4 * weightCommon + 3 * weightUncommon):
-            return 7;
-        case numRand <= (100 - weightLegendary - weightRare):
-            return 8;
-        case numRand <= (100 - weightLegendary):
-            return 9;
-        default:
-            return 10;
+    console.log("numrand - " + numRand);
+    for (var i = 1; i <= countCase; i++) {
+        summaryWeight += parseInt(arrayCase[i-1].getAttribute("weight"),10);
+        console.log(summaryWeight);
+        if (numRand <= summaryWeight) {
+            //parseInt(arrayCase[i-1].getAttribute("id"),10)
+            return i;
+        }
     }
 }
 
@@ -80,13 +73,13 @@ function getImage(number) {
     out += '<img src="Image/' + number + '.jpg" alt="" ';
     
     switch (true) {
-        case number >= 1 && number <= 4:
+        case number >= 1 && number <= countCommon:
             out += 'class="common"';
             break;
-        case number <= 7:
+        case number <= (countCommon + countUncommon):
             out += 'class="uncommon"';
             break;
-        case number <= 9:
+        case number <= (countCommon + countUncommon + countRare):
             out += 'class="rare"';
             break;
         default:
@@ -128,8 +121,8 @@ function getElement(randomNumber) {
     //возвращает готовый к вставке на страницу элемент списка
     var temp = document.createElement('li');
     temp.setAttribute("id", randomNumber);
+    temp.setAttribute("weight",checkWeight(randomNumber));
     temp.innerHTML = getImage(randomNumber);
-    
     return temp;
 }
 
@@ -156,4 +149,17 @@ function outHistory() {
         out += listHistory[key];
     
     document.getElementById('listHistory').innerHTML = out;
+}
+
+function checkWeight(elementNumber){
+    switch(true){
+        case elementNumber >= 1 && elementNumber <= countCommon:
+            return weightCommon;
+        case elementNumber <= (countCommon + countUncommon):
+            return weightUncommon;
+        case elementNumber <= (countCommon + countUncommon + countRare):
+            return weightRare;
+        default:
+            return weightLegendary;
+    }
 }
