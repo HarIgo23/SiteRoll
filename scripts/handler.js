@@ -1,6 +1,4 @@
 var imageFirstElement = listImage.firstElementChild;
-imageFirstElement.style.marginLeft = "-110px";
-
 
 var moveSlider;//запущена ли анимация (true or false)
 var resultSpin;//рандомная переменная которая будет выведена
@@ -35,30 +33,37 @@ document.getElementById('clearHistory').onclick = function clearHistory() {
 function randomItem() {
     //веса у common-14%,uncommon-10%,rare-6%,legendary-2%
     //согласно весам возвращает цифру от 1-10
+    //соmmon 4 шт,uncommon-3 шт,rare-2 шт,legendary-1 шт
+    //Важно! Сумма весов должна равняться 100 
     var min = 1;
     var max = 100;
+    var commonWeight = 14;
+    var uncommonWeight = 10;
+    var rareWeight = 6;
+    var legendaryWeight = 2;
     var numRand = min - 0.5 + Math.random() * (max - min + 1);
     numRand = Math.round(numRand);
-    if (numRand >= 1 && numRand <= 14) {
-        return 1;
-    } else if (numRand <= 28) {
-        return 2;
-    } else if (numRand <= 42) {
-        return 3;
-    } else if (numRand <= 56) {
-        return 4;
-    } else if (numRand <= 66) {
-        return 5;
-    } else if (numRand <= 76) {
-        return 6;
-    } else if (numRand <= 86) {
-        return 7;
-    } else if (numRand <= 92) {
-        return 8;
-    } else if (numRand <= 98) {
-        return 9;
-    } else if (numRand <= 100) {
-        return 10;
+    switch(true) {
+        case numRand >= 1 && numRand <= commonWeight :
+            return 1;
+        case numRand <= 2 * commonWeight:
+            return 2;
+        case numRand <= 3 * commonWeight:
+            return 3;
+        case numRand <= 4 * commonWeight:
+            return 4;
+        case numRand <= (4 * commonWeight + uncommonWeight):
+            return 5;
+        case numRand <= (4 * commonWeight + 2 * uncommonWeight):
+            return 6;
+        case numRand <= (4 * commonWeight + 3 * uncommonWeight):
+            return 7;
+        case numRand <= (100 - legendaryWeight - rareWeight):
+            return 8;
+        case numRand <= (100 - legendaryWeight):
+            return 9;
+        default:
+            return 10;
     }
 }
 
@@ -95,7 +100,7 @@ function motionSlider(durationSpin) {
 	if (timePassed >= durationSpin) {
         //записывает id элемента на котором остановился Slider как конечный результат рандома
         //И выходит из setInterval
-        resultSpin = imageFirstElement.children[2].children[0].getAttribute('id');
+        resultSpin = imageFirstElement.children[1].children[0].getAttribute('id');
         clearInterval(timer);
         
         return;
