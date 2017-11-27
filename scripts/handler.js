@@ -8,10 +8,15 @@ if (countCase === (countCommon + countUncommon + countRare + countLegendary)){
         + countRare * weightRare + countLegendary * weightLegendary)===100) {
         
         for(var i=1; i<=countCase; i++) {
+            //создаёт массив элементов отображающий вероятности 
+            // и их позиции
+            //выводит стартовый список на страницу
             let element=getElement(i);
             element.setAttribute('weight',checkWeight(i));
             element.setAttribute( 'id',i);
+            
             arrayCase.push(element);
+            
             sliderUl.appendChild(element);
         }
         
@@ -142,6 +147,7 @@ function outHistory() {
 }
 
 function checkWeight(elementNumber){
+    //в зависимость от номера элемента возвращает для него вес
     switch(true){
         case elementNumber >= 1 && elementNumber <= countCommon:
             return weightCommon;

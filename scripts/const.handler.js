@@ -4,14 +4,14 @@ var listHistory = [];//масcив в котором хранятся элеме
 var arrayCase = [];//массив для хранения списка элементов
 
 //Важно! Количество countCase равна сумме всех кейсов
-var countCase = 10;
-var countCommon = 4;
-var countUncommon = 3;
+var countCase = 12;
+var countCommon = 5;
+var countUncommon = 4;
 var countRare = 2;
 var countLegendary=1;
 
 //Важно! Веса всех кейсов*количество в сумме должны давать 100
-var weightCommon = 14;
-var weightUncommon = 10;
-var weightRare = 6;
-var weightLegendary = 2;
+var weightCommon = 12;//60
+var weightUncommon = 7;//88
+var weightRare = 5;//98 rare №10,№11
+var weightLegendary = 2;//legendary №12
