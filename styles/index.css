@@ -40,18 +40,6 @@ ul li {
     display: inline ;   
 }
 
-.uncommonList {
-    margin-left:10%;
-}
-
-.rareList {
-   margin-left:20%;
-}
-
-.legendaryList {
-    margin-left:30%;
-}
-
 img {
     border-radius: 10px/20px;
 }
