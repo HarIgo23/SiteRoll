@@ -11,8 +11,6 @@ if (totalWieght === 100) {
     // и их позиции
     //выводит стартовый список на страницу
     let element=getElement(i);
-    element.setAttribute('weight',checkWeight(i));
-    element.setAttribute( 'id',i);
             
     aCase.push(element);
             
@@ -155,5 +153,25 @@ function checkWeight(elementNumber){
             return aWeight[2];
         default:
             return aWeight[3];
+    }
+}
+
+function outAwards() {
+    
+    for(var i = 1;i <= countCase; i++) {
+        switch(true) {
+            case i >= 1 && i <= aCount[0]:
+                commonList.appendChild(getElement(i));
+                break;
+            case i <= (aCount[0] + aCount[1]):
+                uncommonList.appendChild(getElement(i));
+                break;
+            case i <= (aCount[0] + aCount[1] + aCount[2]):
+                rareList.appendChild(getElement(i));
+                break;
+        default:
+                legendaryList.appendChild(getElement(i));
+                break;
+        }
     }
 }
