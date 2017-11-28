@@ -3,41 +3,39 @@ if (localStorage.getItem('history') != undefined) {
     outHistory();
 }
 
-if (countCase === (countCommon + countUncommon + countRare + countLegendary)){
-    if((countCommon * weightCommon + countUncommon *weightUncommon 
-        + countRare * weightRare + countLegendary * weightLegendary)===100) {
-        
-        for(var i=1; i<=countCase; i++) {
-            //создаёт массив элементов отображающий вероятности 
-            // и их позиции
-            //выводит стартовый список на страницу
-            let element=getElement(i);
-            element.setAttribute('weight',checkWeight(i));
-            element.setAttribute( 'id',i);
+
+if (totalWieght === 100) {
+   
+   for(var i=1; i<=countCase; i++) {
+    //создаёт массив элементов отображающий вероятности 
+    // и их позиции
+    //выводит стартовый список на страницу
+    let element=getElement(i);
+    element.setAttribute('weight',checkWeight(i));
+    element.setAttribute( 'id',i);
             
-            arrayCase.push(element);
+    aCase.push(element);
             
-            sliderUl.appendChild(element);
-        }
+    sliderUl.appendChild(element);
+}
         
-        document.getElementById('startSpin').onclick = function () {
-            if(!moveSlider) {
-                 moveSlider = true;
-                var duration = generateDuration();
-                motionSlider(duration);
-                setTimeout(function () {
-                    moveSlider = false;
-                    addHistory();
-                    outHistory();
-                    document.getElementById('out').innerHTML = getImage(resultSpin);
-                    localStorage.setItem('history', JSON.stringify(listHistory));
-                }, duration + 100);
-            }
+document.getElementById('startSpin').onclick = function () {
+    if(!moveSlider) {
+            moveSlider = true;
+            var duration = generateDuration();
+            motionSlider(duration);
+            setTimeout(function () {
+                moveSlider = false;
+                addHistory();
+                outHistory();
+                document.getElementById('out').innerHTML = getImage(resultSpin);
+                localStorage.setItem('history', JSON.stringify(listHistory));
+            }, duration + 100);
         }
     }
 }
 else{
-    consol.log("Допущена ошибка в значении весов или количества кейсов")
+    console.log("Допущена ошибка в значении весов ");
 }
 
 document.getElementById('clearHistory').onclick = function clearHistory() {
@@ -54,7 +52,7 @@ function randomItem() {
     numRand = Math.round(numRand);
     console.log("numrand - " + numRand);
     for (var i = 1; i <= countCase; i++) {
-        summaryWeight += parseInt(arrayCase[i-1].getAttribute("weight"),10);
+        summaryWeight += parseInt(aCase[i-1].getAttribute("weight"), 10);
         console.log(summaryWeight);
         if (numRand <= summaryWeight) {
             return i;
@@ -68,13 +66,13 @@ function getImage(number) {
     out += '<img src="Image/' + number + '.jpg" alt="" ';
     
     switch (true) {
-        case number >= 1 && number <= countCommon:
+        case number >= 1 && number <= aCount[0]:
             out += 'class="common"';
             break;
-        case number <= (countCommon + countUncommon):
+        case number <= (aCount[0] + aCount[1]):
             out += 'class="uncommon"';
             break;
-        case number <= (countCommon + countUncommon + countRare):
+        case number <= (aCount[0] + aCount[1] + aCount[2]):
             out += 'class="rare"';
             break;
         default:
@@ -149,13 +147,13 @@ function outHistory() {
 function checkWeight(elementNumber){
     //в зависимость от номера элемента возвращает для него вес
     switch(true){
-        case elementNumber >= 1 && elementNumber <= countCommon:
-            return weightCommon;
-        case elementNumber <= (countCommon + countUncommon):
-            return weightUncommon;
-        case elementNumber <= (countCommon + countUncommon + countRare):
-            return weightRare;
+        case elementNumber >= 1 && elementNumber <= aCount[0]:
+            return aWeight[0];
+        case elementNumber <= (aCount[0] + aCount[1]):
+            return aWeight[1];
+        case elementNumber <= (aCount[0] + aCount[1] + aCount[2]):
+            return aWeight[2];
         default:
-            return weightLegendary;
+            return aWeight[3];
     }
 }
