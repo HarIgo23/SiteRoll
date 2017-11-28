@@ -1,18 +1,24 @@
-var imageFirstElement = listImage.firstElementChild;
-imageFirstElement.style.marginLeft = "-110px";
-
-
-var moveSlider;//запущена ли анимация (true or false)
-var resultSpin;//рандомная переменная которая будет выведена
-var listHistory = [];//масиив в котором хранятся элементы истории
-
 if (localStorage.getItem('history') != undefined) {
     listHistory = JSON.parse(localStorage.getItem('history'));
     outHistory();
 }
 
+
+if (totalWieght === 100) {
+   
+   for(var i=1; i<=countCase; i++) {
+    //создаёт массив элементов отображающий вероятности 
+    // и их позиции
+    //выводит стартовый список на страницу
+    let element=getElement(i);
+            
+    aCase.push(element);
+            
+    sliderUl.appendChild(element);
+}
+        
 document.getElementById('startSpin').onclick = function () {
-    if (!moveSlider) {
+    if(!moveSlider) {
             moveSlider = true;
             var duration = generateDuration();
             motionSlider(duration);
@@ -23,8 +29,12 @@ document.getElementById('startSpin').onclick = function () {
                 document.getElementById('out').innerHTML = getImage(resultSpin);
                 localStorage.setItem('history', JSON.stringify(listHistory));
             }, duration + 100);
+        }
     }
-};
+}
+else{
+    console.log("Допущена ошибка в значении весов ");
+}
 
 document.getElementById('clearHistory').onclick = function clearHistory() {
     listHistory = [];
@@ -33,55 +43,42 @@ document.getElementById('clearHistory').onclick = function clearHistory() {
 };
 
 function randomItem() {
-    //веса у common-14%,uncommon-10%,rare-6%,legendary-2%
-    //согласно весам возвращает цифру от 1-10
     var min = 1;
     var max = 100;
+    var summaryWeight = 0;
     var numRand = min - 0.5 + Math.random() * (max - min + 1);
     numRand = Math.round(numRand);
-    if (numRand >= 1 && numRand <= 14) {
-        return 1;
-    } else if (numRand <= 28) {
-        return 2;
-    } else if (numRand <= 42) {
-        return 3;
-    } else if (numRand <= 56) {
-        return 4;
-    } else if (numRand <= 66) {
-        return 5;
-    } else if (numRand <= 76) {
-        return 6;
-    } else if (numRand <= 86) {
-        return 7;
-    } else if (numRand <= 92) {
-        return 8;
-    } else if (numRand <= 98) {
-        return 9;
-    } else if (numRand <= 100) {
-        return 10;
+    console.log("numrand - " + numRand);
+    for (var i = 1; i <= countCase; i++) {
+        summaryWeight += parseInt(aCase[i-1].getAttribute("weight"), 10);
+        console.log(summaryWeight);
+        if (numRand <= summaryWeight) {
+            return i;
+        }
     }
 }
 
 function getImage(number) {
     //собирает элемент image в зависимости от полученного номера
     var out = '';
-    out += '<img src="Image/';
-    out += number;
-    out += '.jpg" alt="" ';
+    out += '<img src="Image/' + number + '.jpg" alt="" ';
+    
     switch (true) {
-        case number >= 1 && number <= 4:
+        case number >= 1 && number <= aCount[0]:
             out += 'class="common"';
             break;
-        case number <= 7:
+        case number <= (aCount[0] + aCount[1]):
             out += 'class="uncommon"';
             break;
-        case number <= 9:
+        case number <= (aCount[0] + aCount[1] + aCount[2]):
             out += 'class="rare"';
             break;
         default:
             out += 'class="legendary"';
     }
+    
     out += 'id="' + number + '">';
+    
     return out;
 }
 
@@ -95,27 +92,28 @@ function motionSlider(durationSpin) {
 	if (timePassed >= durationSpin) {
         //записывает id элемента на котором остановился Slider как конечный результат рандома
         //И выходит из setInterval
-        resultSpin = imageFirstElement.children[2].children[0].getAttribute('id');
+        resultSpin = listImage.firstElementChild.children[1].getAttribute('id');
         clearInterval(timer);
         
         return;
     }
         
-        if (countRepeat < 10) {
+        if (countRepeat < countCase) {
             //заменяет все элементы на новые
-            imageFirstElement.replaceChild(getElement(randomItem()), imageFirstElement.children[countRepeat]);
+            listImage.firstElementChild.replaceChild(getElement(randomItem()), listImage.firstElementChild.children[countRepeat]);
             countRepeat++;
         }
         
-        imageFirstElement.appendChild(imageFirstElement.firstElementChild);
+        listImage.firstElementChild.appendChild(listImage.firstElementChild.firstElementChild);
     }, 60);
 }
 
 function getElement(randomNumber) {
     //возвращает готовый к вставке на страницу элемент списка
     var temp = document.createElement('li');
+    temp.setAttribute("id", randomNumber);
+    temp.setAttribute("weight",checkWeight(randomNumber));
     temp.innerHTML = getImage(randomNumber);
-    
     return temp;
 }
 
@@ -134,9 +132,46 @@ function addHistory() {
 }
 
 function outHistory() {
+    //вставляет на страницу собранный из массива
+    //список изображений
     var out = '';
     
     for (var key in listHistory)
         out += listHistory[key];
+    
     document.getElementById('listHistory').innerHTML = out;
+}
+
+function checkWeight(elementNumber){
+    //в зависимость от номера элемента возвращает для него вес
+    switch(true){
+        case elementNumber >= 1 && elementNumber <= aCount[0]:
+            return aWeight[0];
+        case elementNumber <= (aCount[0] + aCount[1]):
+            return aWeight[1];
+        case elementNumber <= (aCount[0] + aCount[1] + aCount[2]):
+            return aWeight[2];
+        default:
+            return aWeight[3];
+    }
+}
+
+function outAwards() {
+    
+    for(var i = 1;i <= countCase; i++) {
+        switch(true) {
+            case i >= 1 && i <= aCount[0]:
+                commonList.appendChild(getElement(i));
+                break;
+            case i <= (aCount[0] + aCount[1]):
+                uncommonList.appendChild(getElement(i));
+                break;
+            case i <= (aCount[0] + aCount[1] + aCount[2]):
+                rareList.appendChild(getElement(i));
+                break;
+        default:
+                legendaryList.appendChild(getElement(i));
+                break;
+        }
+    }
 }

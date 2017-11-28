@@ -4,23 +4,14 @@
        <meta charset="UTF-8">
        <title>Главная</title>
        <link rel="stylesheet" href="styles/index.css">
+       <script src="scripts/const.handler.js" defer></script>
        <script src="scripts/handler.js" defer></script>
     </head>
     <body>
 
       <div id="slider">
           <div id="listImage">
-               <ul sliderUl>
-                   <li><img src="Image/1.jpg" class="common" id='1'></li>
-                   <li><img src="Image/2.jpg" class="common" id='2'></li>
-                   <li><img src="Image/3.jpg" class="common" id='3'></li>
-                   <li><img src="Image/4.jpg" class="common" id='4'></li>
-                   <li><img src="Image/5.jpg" class="uncommon" id='5'></li>
-                   <li><img src="Image/6.jpg" class="uncommon" id='6'></li>
-                   <li><img src="Image/7.jpg" class="uncommon" id='7'></li>
-                   <li><img src="Image/8.jpg" class="rare" id='8'></li>
-                   <li><img src="Image/9.jpg" class="rare" id='9'></li>
-                   <li><img src="Image/10.jpg" class="legendary" id='10'></li>   
+               <ul id="sliderUl">
                </ul>
           </div>
           <button id="startSpin">Start</button>  
@@ -38,7 +29,8 @@
       </div>
       <hr>
       
-     <h1>Возможные награды :</h1> 
+     
+      <h1>Возможные награды :</h1> 
        <div id="listAwards">
           <h2 id="commonText">common</h2>
            <ul id="commonList">
@@ -48,18 +40,18 @@
                <li ><img src="Image/4.jpg" alt="" class="common"></li>
            </ul>
            <h2 id="uncommonText">uncommon</h2>
-           <ul class="uncommonList">
+           <ul id="uncommonList">
                <li  ><img src="Image/5.jpg" alt="" class="uncommon"></li>
 	           <li ><img src="Image/6.jpg" alt="" class="uncommon"></li>
 	           <li ><img src="Image/7.jpg" alt="" class="uncommon"></li>
 	       </ul>
           <h2 id="rareText">rare</h2>
-           <ul class="rareList">
+           <ul id="rareList">
                <li ><img src="Image/8.jpg" alt="" class="rare"></li>
                <li ><img src="Image/9.jpg" alt="" class="rare"></li>
            </ul>
            <h2 id="legendaryText">legendary</h2>
-           <ul class="legendaryList">
+           <ul id="legendaryList">
                <li ><img src="Image/10.jpg" alt="" class="legendary"></li>
            </ul>
        </div>
